@@ -10,7 +10,7 @@
         {!! Lte3::select2('status', 'new', ['Success', 'Paused', 'Canceled', 'New', 'Old'], [
             'label' => 'Status',
             'multiple' => 1,
-            'id' => 'status5'
+            'id' => 'status_filter1'
         ]) !!}
     </div>
     <div class="col-md-3">

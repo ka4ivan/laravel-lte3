@@ -435,8 +435,9 @@
     <script src="/vendor/editorjs/editorjs.mjs" referrerpolicy="origin"></script>
 
     <script>
-        var lfmImageFolder = $('#editorjs').data('lfm-image-folder') ?? 'images';
-        var lfmFileFolder = $('#editorjs').data('lfm-file-folder') ?? 'files';
+        var $editorJs = $('#editorjs');
+        var lfmImageFolder = $editorJs.data('lfm-image-folder') ?? 'images';
+        var lfmFileFolder = $editorJs.data('lfm-file-folder') ?? 'files';
 
         class Lfm {
             static get toolbox() {

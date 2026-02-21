@@ -311,3 +311,25 @@ img.avatar-border {
     background: white;
     border-color: #ced4da;
 }
+
+
+
+/* Editor.js */
+.dropdown-item-custom:focus, .dropdown-item-custom:active {
+    background-color: transparent !important;
+    color: inherit !important;
+    text-decoration: none;
+    outline: none !important;
+}
+
+.ce-block__content, .ce-toolbar__content {
+    max-width: calc(100% - 120px) !important;
+}
+
+.cdx-block {
+    max-width: 100% !important;
+}
+
+.codex-editor__redactor {
+    padding-bottom: 0 !important;
+}

@@ -29,7 +29,7 @@
             @forelse($items as $item)
                 <tr class="item first">
                     <td class="align-middle text-center">
-                        <i class="fa fa-arrows-alt-v"></i>
+                        <i class="fas fa-sort"></i>
                     </td>
                     <td class="w-100">
                         <div class="input-group input-group-sm">
@@ -54,7 +54,7 @@
             @empty
                 <tr class="item first">
                     <td class="align-middle text-center">
-                        <i class="fa fa-arrows-alt-v"></i>
+                        <i class="fas fa-sort"></i>
                     </td>
                     <td class="w-100">
                         <div class="input-group input-group-sm">

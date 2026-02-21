@@ -88,8 +88,10 @@
             </div>
         </div>
 
+        <!-- STATIC OPEN FILTER -->
+        {{--@include('lte3::examples.inc.filter')--}}
+
         <!-- FILTER -->
-        @include('lte3::examples.inc.filter')
         @include('lte3::examples.inc.filter2')
 
         <!-- LIST/TABLE -->
@@ -120,27 +122,27 @@
             </div>
 
             <div class="card-body table-responsive p-0">
-                @php($options = session()->get('table-options', [])['columns'] ?? [])
-                <table class="table table-hover js-options-columns" data-options=@json($options)>
+                @php($tableOptions = session()->get('table-options', [])['columns'] ?? [])
+                <table class="table table-hover js-table-options-columns" data-options=@json($tableOptions)>
                     <thead>
                     <tr>
                         <th style="width: 1%">#</th>
-                        <th class="js-options-dropdown" style="width: 10px;"></th>
-                        <th class="js-options-img"></th>
-                        <th class="js-options-name" style="width: 15%">Name</th>
-                        <th class="js-options-members" style="width: 20%">Members</th>
-                        <th class="js-options-sum">Sum</th>
-                        <th class="js-options-progress">Progress</th>
-                        <th class="js-options-status" style="width: 8%">Status</th>
-                        <th></th>
-                        <th style="width: 20%"></th>
+                        <th class="js-table-options-actions" style="width: 10px;"></th>
+                        <th class="js-table-options-img"></th>
+                        <th class="js-table-options-name" style="width: 15%">Name</th>
+                        <th class="js-table-options-members" style="width: 20%">Members</th>
+                        <th class="js-table-options-sum">Sum</th>
+                        <th class="js-table-options-progress">Progress</th>
+                        <th class="js-table-options-status" style="width: 8%">Status</th>
+                        <th class="js-table-options-actions2"></th>
+                        <th class="js-table-options-buttons" style="width: 20%"></th>
                     </tr>
                     </thead>
                     <tbody class="sortable-y" data-url="{{ route('lte3.data.save') }}">
                     @foreach($progects as $progect)
                         <tr id="{{ $loop->index }}" class="va-center">
-                            <td><i class="fa fa-arrows-alt-v"></i></td>
-                            <td>
+                            <td><i class="fas fa-sort"></i></td>
+                            <td class="js-table-options-actions">
                                 <div class="btn-actions dropdown">
                                     <button type="button" class="btn btn-sm btn-default" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></button>
                                     <div class="dropdown-menu" role="menu" style="top: 93%;">
@@ -154,17 +156,17 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td class="js-table-options-img">
                                 <a href="/vendor/lte3/img/no-image.png" class="js-popup-image">
                                     <img src="/vendor/lte3/img/no-image.png" class="img-thumbnail" style="max-width: 100px">
                                 </a>
                             </td>
-                            <td>
+                            <td class="js-table-options-name">
                                 <a class="hover-edit" href="#">{{ $progect['name'] }}</a>
                                 <br/>
                                 <small class="js-clipboard with-mark">Created {{ $progect['created_at'] }}</small>
                             </td>
-                            <td>
+                            <td class="js-table-options-members">
                                 <ul class="list-inline m-0">
                                     @foreach($progect['images'] as $img)
                                     <li class="list-inline-item js-popup-images">
@@ -173,8 +175,8 @@
                                     @endforeach
                                 </ul>
                             </td>
-                            <td>$<span class="js-num-format text-nowrap">{{ $progect['sum'] }}</span></td>
-                            <td>
+                            <td class="js-table-options-sum">$<span class="js-num-format text-nowrap">{{ $progect['sum'] }}</span></td>
+                            <td class="js-table-options-progress">
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-green" role="progressbar"
                                          aria-valuenow="{{$progect['progress']}}"
@@ -183,7 +185,7 @@
                                 </div>
                                 <small class="text-nowrap"> {{$progect['progress']}}% Complete </small>
                             </td>
-                            <td>
+                            <td class="js-table-options-status">
                                 <a href="#" class="hover-edit js-modal-fill-html"
                                     data-target="#modal-lg"
                                     data-url="{{route('lte3.data.modal-content', ['modal' => 'lg'])}}"
@@ -193,7 +195,7 @@
                             </td>
                             <td class="text-right">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-default">Action</button>
+                                    <button type="button" class="btn btn-sm btn-default js-table-options-actions2">Action</button>
                                     <button type="button" class="btn btn-sm btn-default dropdown-toggle dropdown-icon"
                                             data-toggle="dropdown" aria-expanded="false">
                                         <span class="sr-only">Toggle Dropdown</span>
@@ -206,7 +208,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-right">
+                            <td class="text-right js-table-options-buttons">
                                 <a href="#" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>
                                 <a href="#" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></a>
                                 <a href="{{ route('lte3.data.save') }}" class="btn btn-danger btn-sm js-ajax-send"
@@ -219,40 +221,49 @@
             </div>
             {!! Lte3::tableOptions([
                 [
-                    'key' => 'dropdown',
-                    'name' => 'Кнопки dropdown',
+                    'key' => 'actions',
+                    'name' => 'Actions Btn',
                 ],
                 [
                     'key' => 'img',
-                    'name' => 'Фото',
+                    'name' => 'Photo',
                 ],
                 [
                     'key' => 'name',
-                    'name' => 'Назва',
+                    'name' => 'Name',
                 ],
                 [
                     'key' => 'members',
-                    'name' => 'Учасники',
+                    'name' => 'Members',
                 ],
                 [
                     'key' => 'sum',
-                    'name' => 'Сума',
+                    'name' => 'Sum',
                 ],
                 [
                     'key' => 'progress',
-                    'name' => 'Прогрес',
+                    'name' => 'Progress',
                 ],
                 [
                     'key' => 'status',
-                    'name' => 'Статус',
+                    'name' => 'Status',
                 ],
-            ], $options, [
+                [
+                    'key' => 'actions2',
+                    'name' => 'Actions 2',
+                ],
+                [
+                    'key' => 'buttons',
+                    'name' => 'Buttons',
+                ],
+            ], $tableOptions, [
                 'action' => route('lte3.data.save', ['key' => 'table-options', 'value_key' => 'table_options']),
                 'method' => 'post',
                 'table' => 'columns',
                 'name' => 'table_options',
                 'preloader' => true,
             ]) !!}
+
             <div class="card-footer clearfix">
                 {!! Lte3::pagination($terms ?? null) !!}
             </div>
@@ -1053,7 +1064,7 @@
 
             <div class="card-body">
                 {!! Lte3::formOpen(['action' => route('lte3.data.save', ['action' => 'save-dd', 'key' => 'editorjs-data', 'value_key' => 'editorjs_data']), null, 'method' => 'POST']) !!}
-                <div id="editorjs" data-lfm-image-folder="images" data-lfm-file-folder="files" style="border: 1px solid #ddd; border-radius: .25rem" class="mb-3"></div>
+                <div id="editorjs" data-lfm-image-folder="images" data-lfm-file-folder="files" style="height:450px; border: 1px solid #ddd; border-radius: .25rem" class="mb-3"></div>
                 {!! Lte3::hidden('editorjs_data', session()->get('editorjs-data') ?: '{"time":1729844966856,"blocks":[{"id":"tCGreiYH5q","type":"header","data":{"text":"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Editor.js","level":2},"tunes":{"textVariant":""}},{"id":"qOmb7csMW2","type":"list","data":{"style":"ordered","items":["add div with id -&nbsp;editorjs","add hidden input with any name (ex. editorjs_data) and id -&nbsp;editorjs_data"]},"tunes":{"textVariant":""}}],"version":"2.30.6"}', [
                     'id' => 'editorjs_data',
                 ]) !!}
@@ -1093,7 +1104,7 @@
                                         <div class="f-item">
                                             <a href="#" class="btn btn-xs btn-danger float-right js-btn-delete"><i
                                                     class="fa fa-trash"></i></a>
-                                            <i class="fa fa-arrows-alt-v cursor-move"></i>
+                                            <i class="fas fa-sort cursor-move"></i>
                                             {!! Lte3::text('block[items][$i][question]', null, ['label' => 'Question',]) !!}
                                             {!! Lte3::textarea('block[items][$i][answer]', null, ['label' => 'Answer',]) !!}
                                             {!! Lte3::lfmImage('block[items][$i][img]', null, ['label' => 'Img',]) !!}
@@ -1107,7 +1118,7 @@
                                             <div class="f-item">
                                                 <a href="#" class="btn btn-xs btn-danger float-right js-btn-delete"><i
                                                         class="fa fa-trash"></i></a>
-                                                <i class="fa fa-arrows-alt-v cursor-move"></i>
+                                                <i class="fas fa-sort cursor-move"></i>
                                                 {!! Lte3::text("block[items][{$loop->index}][question]", Arr::get($item, 'question'), ['label' => 'Question']) !!}
                                                 {!! Lte3::textarea("block[items][{$loop->index}][answer]", Arr::get($item, 'answer'), ['label' => 'Answer',]) !!}
                                                 {!! Lte3::lfmImage("block[items][{$loop->index}][img]", Arr::get($item, 'img'), ['label' => 'Img'] ) !!}

@@ -799,7 +799,7 @@ $(function () {
             placeholderKey = $parent.data('placeholder-key'),
             placeholderValue = $parent.data('placeholder-value'),
             item = '<tr class="item">'
-                + '<td class="align-middle text-center"><i class="fa fa-arrows-alt-v"></i></td>'
+                + '<td class="align-middle text-center"><i class="fas fa-sort"></i></td>'
                 + '<td class="w-100">'
                 + '<div class="input-group input-group-sm">'
                 + '<input name="' + fieldName + '[' + (length) + '][' + keyKey + ']" class="form-control" placeholder="' + placeholderKey + '" type="text">'
@@ -836,7 +836,7 @@ $(function () {
             fieldName = $parent.data('field-name'),
             placeholderValue = $parent.data('placeholder-value'),
             item = '<tr class="item">'
-                + '<td class="align-middle text-center"><i class="fa fa-arrows-alt-v"></i></td>'
+                + '<td class="align-middle text-center"><i class="fas fa-sort"></i></td>'
                 + '<td class="w-100">'
                 + '<div class="input-group input-group-sm">'
                 + '<input name="' + fieldName + '[' + (length) + ']" placeholder="' + placeholderValue + ' ' + (parseInt(length) + 1) + '" class="form-control" type="text">'
