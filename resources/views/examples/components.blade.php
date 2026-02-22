@@ -122,7 +122,7 @@
             </div>
 
             <div class="card-body table-responsive p-0">
-                @php($tableOptions = session()->get('table-options', [])['columns'] ?? [])
+                @php($tableOptions = session()->get('table-options', [])['orders'] ?? [])
                 <table class="table table-hover js-table-options-columns" data-options=@json($tableOptions)>
                     <thead>
                     <tr>
@@ -257,10 +257,10 @@
                     'name' => 'Buttons',
                 ],
             ], $tableOptions, [
-                'action' => route('lte3.data.save', ['key' => 'table-options', 'value_key' => 'table_options']),
+                'action' => route('lte3.data.save', ['key' => 'table-options']),
                 'method' => 'post',
-                'table' => 'columns',
-                'name' => 'table_options',
+                'table' => 'orders',
+                'name' => 'value',
                 'preloader' => true,
             ]) !!}
 
